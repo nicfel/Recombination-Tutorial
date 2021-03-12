@@ -10,20 +10,18 @@ beastversion: 2.6.3
 # Background
 
 Phylogenetic trees are often used to describe the history of genetic sequences.
-There are however several processes that recombine genetic material.
-Different parts of genome can then code for different histories and the shared history of the full genome can not be represented anymore by a tree.
-Reassortment is such a process that can reshuffle segments when people are infected by multiple viruses.
+This relatedness of genetic sequences can be used to learn how e.g. pathogens isoalted from different individuals are related, which tells us somethings about the transmission history.
+Recombination breaks the central assumption that this relatedness can be represented by a tree and requires it to be denoted by a network instead.
 
-The coalescent with reassortment models a joint coalescent and reassortment process {% cite muller2020bayesian --file Reassortment-Tutorial/master-refs %}.
-To do so, it models how network lineages coalesce and recombine backwards in time.
+The coalescent with recombination models a joint coalescent and recombination process {% cite muller2020bayesian --file Reassortment-Tutorial/master-refs %}.
+To do so, it models how network lineages coalesce and recombine backwards in time. 
+This is the backwards in time equivalent of the template switching model of recombination upon coninfection, where one such event occurs per coinfection event.
 
-In order to perform inference under the coalescent with reassortment, CoalRe uses MCMC sampling of the reassortment network and the embedding of segment trees within those networks.
-The way CoalRe is implemented, allows following the usual setup for BEAST2 xml files in BEAUti.
-The difference in setting up CoalRe compare to other models is that the Coalescent with Reassortment has to be specified as a tree prior for all segments individually.
+In order to perform inference under the coalescent with recombination, the Recombination package uses MCMC sampling of recombination networks and how local trees, i.e. trees at individual nucleotide positions, are embedded within those networks.
+The way the Recombination package is implemented, allows following the usual setup for BEAST2 xml files in BEAUti.
 
-After running CoalRe, the post-processing works slightly different to other models.
-Since we have to analyse a network and not just a tree, CoalRe implements a BEAST2 app that summarizes networks and works similar to treeAnnotator.
-
+After running a coalescent with recombination analysis, the post-processing works slightly different to other models.
+Since we have to analyse a network and not just a tree, the Recombination package implements a BEAST2 app that summarizes networks and works similar to treeAnnotator.
 
 ----
 
@@ -55,10 +53,10 @@ In this tutorial, we will learn how to create an xml for a coalescent with recom
 
 ## The Data
 
-The data consists of sequences of the spike protein of one of the seasonal human coronaviruses called 229e.
-The spike protein is the protein that facilitates virus fusion and entry into human cells.
+The data consists of sequences of the nucleocapsid protein of one of the seasonal human coronaviruses called 229e.
+The nucleocapsid protein is a structural protein of cornaviruses.
 
-Overall, the dataset we use in this tutorial consists of 49 sequences of the spike protein of 229e viruses sampled over several years [https://www.viprbrc.org/](https://www.viprbrc.org/).
+Overall, the dataset we use in this tutorial consists of 25 sequences of the nucleocapsid protein of 229e viruses sampled over several years [https://www.viprbrc.org/](https://www.viprbrc.org/).
 The sequences are already aligned and can be found in the data folder.
 
 
@@ -98,7 +96,7 @@ In the window that should pop up, select split on character
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:30%;" src="figures/SplitCharacter.png" alt="">
-	<figcaption>Figure 4: Split character and take the 4th group to get the sampling times .</figcaption>
+	<figcaption>Figure 4: Split character and take the last group to get the sampling times .</figcaption>
 </figure>
 
 ## Setting up the site model
@@ -122,14 +120,14 @@ The first and most important thing we have to do here, is to to change the `Yule
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/CoalescentWithRecombination.png" alt="">
-	<figcaption>Figure 8: Changing the Yule model to the coalescent with recombination.</figcaption>
+	<figcaption>Figure 8: Changing the Yule model to the coalescent with recombination model.</figcaption>
 </figure>
 
 We next have to set the prior distribution on the parameters.
 The prior distribution on the effective population size can be left as is, but we have to change the prior on the recombination rate.
 Set the prior distribution on the reassortment rate to be an exponential distribution with mean 0.0001.
 This means that we assume a priori that on average there is one recombination event between every pair of adjecent positions in the alignment occur every 1000 years.
-Since our alignment has 3522 nucleotides, we expect one event to occur on a lineage every 1000/(3522-1) years.
+Since our alignment has 1170 nucleotides, we expect one event to occur on a lineage every 1000/(1170-1) years.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -138,7 +136,8 @@ Since our alignment has 3522 nucleotides, we expect one event to occur on a line
 </figure>
 
 ## Setting up the Chain Length
-Next, we can go to the `MCMC` panel to set the chain length. For this analysis with just a few sequences, a chain length of 5 million should be enough.
+Next, we can go to the `MCMC` panel to set the chain length. 
+For this analysis that doesn't describe a too complex recombination network, a chain length of 10 million should be enough.
 This was the last step of setting up the xml and we can now save it by going to `File > Save as`
 
 <figure>
@@ -149,7 +148,7 @@ This was the last step of setting up the xml and we can now save it by going to 
 
 ## Run the xml
 Next, open `BEAST` and run the xml.
-This should take somewhere in the order of 15 to 20 minutes.
+This should take somewhere in the order of 40 to 60 minutes.
 Alternative, the folder `precooked_runs` contains the log files of the run.
 
 ## Inspect the run in Tracer
@@ -173,7 +172,7 @@ Next, we can summarize the distribution of networks by maximizing the clade cred
 To do so, open `BEAUti` and select `File > Launch Apps`.
 Then, select `Recombination Network Annotator`.
 
-Next, choose the `networks.trees` file as input for the `Recombination Network log file` and choose the file where the mcc network should be saved to and press analyse.
+Next, choose the `229e_nucelocapsid.networks.trees` file as input for the `Recombination Network log file` and choose the file where the mcc network should be saved to and press analyse.
 
 <figure>
 	<a id="fig:example1"></a>
@@ -185,10 +184,9 @@ Next, choose the `networks.trees` file as input for the `Recombination Network l
 Next, open your browser and go to the webpage [icytree.org](icytree.org){% cite vaughan2017icytree --file Reassortment-Tutorial/master-refs %}
 The resulting mcc network file can now be drag and dropped into icytree to visualize the network.
 Icytree plots the network as a base tree that is connected by dotted branches.
-This implies that at a reassortment event, there is a difference between the two parent branches.
-This is, however, not the case in the coalescent with reassortment model, but for simplicity is plotted like this.
-The "main" branch here is the always the parent branch that carries more segments.
-If both branches carry the same amount of segments, the branch that is closer the next event is chosen as the main branch.
+This implies that at a recombination event, there is a difference between the two parent branches.
+This is, however, not the case in this coalescent with recombination model, but for simplicity is plotted like this.
+The "main" branch here is the always the parent branch that carries more genetic material, in the sense that more of it's genetic material is sampled in the future and therefore shows up the network.
 
 <figure>
 	<a id="fig:example1"></a>
