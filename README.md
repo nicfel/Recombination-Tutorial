@@ -96,7 +96,7 @@ In the window that should pop up, select split on character
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:30%;" src="figures/SplitCharacter.png" alt="">
-	<figcaption>Figure 4: Split character and take the last group to get the sampling times .</figcaption>
+	<figcaption>Figure 3: Split character and take the last group to get the sampling times .</figcaption>
 </figure>
 
 ## Setting up the site model
@@ -110,7 +110,7 @@ Clicking `estimate` for the `Substitution Rate` allows each segment, as well as 
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/SiteModel.png" alt="">
-	<figcaption>Figure 6: Setting up the site models tp an $HKY+\Gamma_4$ model.</figcaption>
+	<figcaption>Figure 4: Setting up the site models tp an $HKY+\Gamma_4$ model.</figcaption>
 </figure>
 
 ## Setting up the Priors
@@ -120,7 +120,7 @@ The first and most important thing we have to do here, is to to change the `Yule
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/CoalescentWithRecombination.png" alt="">
-	<figcaption>Figure 8: Changing the Yule model to the coalescent with recombination model.</figcaption>
+	<figcaption>Figure 5 Changing the Yule model to the coalescent with recombination model.</figcaption>
 </figure>
 
 We next have to set the prior distribution on the parameters.
@@ -132,7 +132,7 @@ Since our alignment has 1170 nucleotides, we expect one event to occur on a line
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/RecombinationPrior.png" alt="">
-	<figcaption>Figure 9: Setting the prior distribution on the recombination rate.</figcaption>
+	<figcaption>Figure 6: Setting the prior distribution on the recombination rate.</figcaption>
 </figure>
 
 ## Setting up the Chain Length
@@ -143,7 +143,7 @@ This was the last step of setting up the xml and we can now save it by going to 
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:20%;" src="figures/SaveXml.png" alt="">
-	<figcaption>Figure 10: Save xml.</figcaption>
+	<figcaption>Figure 7: Save xml.</figcaption>
 </figure>
 
 ## Run the xml
@@ -159,7 +159,7 @@ All ESS values should optimally be above 200.
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/Tracer.png" alt="">
-	<figcaption>Figure 11: Check convergence in Tracer.</figcaption>
+	<figcaption>Figure 8: Check convergence in Tracer.</figcaption>
 </figure>
 
 Next, we can check what rates were inferred.
@@ -177,7 +177,7 @@ Next, choose the `229e_nucelocapsid.networks.trees` file as input for the `Recom
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/Summary.png" alt="">
-	<figcaption>Figure 12: Produce the maximum clade credibility network.</figcaption>
+	<figcaption>Figure 9: Produce the maximum clade credibility network.</figcaption>
 </figure>
 
 ## Visualize the network using icytree.org
@@ -191,7 +191,7 @@ The "main" branch here is the always the parent branch that carries more genetic
 <figure>
 	<a id="fig:example1"></a>
 	<img style="width:70%;" src="figures/IcyTree.png" alt="">
-	<figcaption>Figure 13: Visualize the mcc network in icytree.</figcaption>
+	<figcaption>Figure 10: Visualize the mcc network in icytree.</figcaption>
 </figure>
 
 The 95 $\%$ highest posterior density intervals for node heights can be plotted by going to `Style > Node height error bars`.
