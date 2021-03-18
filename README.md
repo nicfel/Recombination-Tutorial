@@ -63,9 +63,9 @@ To access the data on your computer, clone the Github repository for this tutori
 
 
 
-## Download CoalRe and Recombination packages
-First, we have to download the CoalRe and Recombination packages using the BEAUti package manager.
-To do so, open BEAUTi and then go to `File >> Manage Packages` and click on CoalRe and then the `Install/Upgrade` button. Do the same with the Recombination package.
+## Download the Recombination package
+First, we have to download the Recombination package using the BEAUti package manager.
+To do so, open BEAUTi and then go to `File >> Manage Packages` and click on Recombination and then the `Install/Upgrade` button. 
 
 <figure>
 	<a id="fig:example1"></a>
@@ -104,10 +104,9 @@ In the window that should pop up, select use everything and choose "after last" 
 ## Setting up the site model
 As a site model, we will use an $HKY+\Gamma_4$ model.
 To do so, first set the site model from `JC69` to `HKY`, which allows transition and transversion rates to differ.
-Next, set the `Gamma Category Count` to 4 and make sure to click `estimate` for the `Substitution Rate`.
+Next, set the `Gamma Category Count` to 4.
 Setting the `Gamma Category Count` to 4 uses a discretized version of a gamma distribution to model different rate categories across sites.
 4 or 5 different categories has been shown to be a good compromise between computational efficiency and still being able to approximate the gamma distribution well enough in practice.
-Clicking `estimate` for the `Substitution Rate` allows each segment, as well as the first two and the third codon position, to have different relative rates of evolution.
 
 <figure>
 	<a id="fig:example1"></a>
