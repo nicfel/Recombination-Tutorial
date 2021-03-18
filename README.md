@@ -164,13 +164,13 @@ All ESS values should optimally be above 200.
 </figure>
 
 Next, we can check what rates were inferred.
-The `clockRate` denotes the average rate of evolution across all segments.
-The `recombinationRate` denotes the rate of recombination (from present to past) per lineage and year betwenn adjecent positions in the genome.
+The `clockRate` denotes the average rate of evolution in 229E nucleocapsid.
+The `recombinationRate` denotes the rate of recombination (from present to past) per lineage and year between adjecent positions in the genome.
 
 
 ## Summarize the posterior distribution of networks
 Next, we can summarize the distribution of networks by maximizing the clade credibilities.
-To do so, open `BEAUti` and select `File > Launch Apps`.
+To do so, open `BEAUti` and select `File > Launch Apps`. Click Launch.
 Then, select `Recombination Network Annotator`.
 
 Next, choose the `229e_nucelocapsid.networks.trees` file as input for the `Recombination Network log file` and choose the file where the mcc network should be saved to and press analyse.
@@ -183,11 +183,11 @@ Next, choose the `229e_nucelocapsid.networks.trees` file as input for the `Recom
 
 ## Visualize the network using icytree.org
 Next, open your browser and go to the webpage [icytree.org](icytree.org){% cite vaughan2017icytree --file Reassortment-Tutorial/master-refs %}
-The resulting mcc network file can now be drag and dropped into icytree to visualize the network.
+The resulting MCC network file can now be dragged and dropped into icytree to visualize the network.
 Icytree plots the network as a base tree that is connected by dotted branches.
-This implies that at a recombination event, there is a difference between the two parent branches.
+This implies that, at a recombination event, there is a difference between the two parent branches.
 This is, however, not the case in this coalescent with recombination model, but for simplicity is plotted like this.
-The "main" branch here is the always the parent branch that carries more genetic material, in the sense that more of it's genetic material is sampled in the future and therefore shows up the network.
+The "main" branch here is the always the parent branch that carries more genetic material, in the sense that more of its genetic material is sampled in the future and therefore shows up the network.
 
 <figure>
 	<a id="fig:example1"></a>
